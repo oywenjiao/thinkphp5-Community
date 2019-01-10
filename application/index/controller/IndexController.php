@@ -1,16 +1,11 @@
 <?php
 namespace app\index\controller;
 
-use app\api\model\ArticleContent;
-
-class Index
+class IndexController
 {
     public function index()
     {
-        $content = ArticleContent::get(1);
-        return view()->assign([
-            'content'   => $content
-        ]);
+        return view();
     }
 
     public function hello($name = 'ThinkPHP5')
