@@ -19,14 +19,14 @@
             </span>
         </div>
         <ul class="fly-list">
-            {for start="1" end="11"}
+            {volist name='list' id='article'}
                 <li>
                     <a href="{:url('/user')}" class="fly-avatar">
                         <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
                     </a>
                     <h2>
                         <a class="layui-badge">动态</a>
-                        <a href="{:url('/info')}">首页文章标题{$i}</a>
+                        <a href="{:url('/info')}">{$article.title}</a>
                     </h2>
                     <div class="fly-list-info">
                         <a href="{:url('/user')}" link>
@@ -45,7 +45,7 @@
                         <span class="layui-badge layui-bg-red">精帖</span>
                     </div>
                 </li>
-            {/for}
+            {/volist}
         </ul>
         <div style="text-align: center">
             <div class="laypage-main">

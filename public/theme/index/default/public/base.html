@@ -10,6 +10,7 @@
     <meta name="description" content="{block name='description'}Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力{/block}">
     <link rel="stylesheet" href="__MODULE_STATIC__/layui/css/layui.css">
     <link rel="stylesheet" href="__CSS__/global.css">
+    {block name="meta"}{/block}
     {block name="style"}{/block}
 </head>
 <body>
@@ -234,81 +235,79 @@
         </div>
         <div class="layui-col-md4">
             {block name="right"}
-            <div class="fly-panel">
-                <h3 class="fly-panel-title">温馨通道</h3>
-                <div class="layui-row fly-panel-main" style="padding: 15px;">
-                    <div class="layui-clear fly-list-quick">
-                        {for start="1" end="7"}
-                        <div class="layui-col-xs6">
-                            <div>
-                                <a href="/extend/" target="_blank"> 组件平台{$i} </a>
+                <!--<div class="fly-panel">
+                    <h3 class="fly-panel-title">温馨通道</h3>
+                    <div class="layui-row fly-panel-main" style="padding: 15px;">
+                        <div class="layui-clear fly-list-quick">
+                            {for start="1" end="7"}
+                            <div class="layui-col-xs6">
+                                <div>
+                                    <a href="/extend/" target="_blank"> 组件平台{$i} </a>
+                                </div>
                             </div>
+                            {/for}
+                            <a name="signin"> </a>
                         </div>
-                        {/for}
-                        <a name="signin"> </a>
                     </div>
-                </div>
-            </div>
+                </div>-->
 
-            <!--<div class="fly-panel fly-signin">
-                <div class="fly-panel-title">
-                    签到
-                    <i class="fly-mid"></i>
-                    <a href="javascript:;" class="fly-link" id="LAY_signinHelp">说明</a>
-                    <i class="fly-mid"></i>
-                    <a href="javascript:;" class="fly-link" id="LAY_signinTop">活跃榜<span class="layui-badge-dot"></span></a>
-                    <span class="fly-signin-days">已连续签到<cite>16</cite>天</span>
-                </div>
-                <div class="fly-panel-main fly-signin-main">
-                    <button class="layui-btn layui-btn-danger" id="LAY_signin">今日签到</button>
-                    <span>可获得<cite>5</cite>飞吻</span>-->
+                <!--<div class="fly-panel fly-signin">
+                    <div class="fly-panel-title">
+                        签到
+                        <i class="fly-mid"></i>
+                        <a href="javascript:;" class="fly-link" id="LAY_signinHelp">说明</a>
+                        <i class="fly-mid"></i>
+                        <a href="javascript:;" class="fly-link" id="LAY_signinTop">活跃榜<span class="layui-badge-dot"></span></a>
+                        <span class="fly-signin-days">已连续签到<cite>16</cite>天</span>
+                    </div>
+                    <div class="fly-panel-main fly-signin-main">
+                        <button class="layui-btn layui-btn-danger" id="LAY_signin">今日签到</button>
+                        <span>可获得<cite>5</cite>飞吻</span>-->
 
-                    <!-- 已签到状态 -->
-                    <!--
-                    <button class="layui-btn layui-btn-disabled">今日已签到</button>
-                    <span>获得了<cite>20</cite>飞吻</span>
-                    -->
-                <!--</div>
-            </div>-->
+                        <!-- 已签到状态 -->
+                        <!--
+                        <button class="layui-btn layui-btn-disabled">今日已签到</button>
+                        <span>获得了<cite>20</cite>飞吻</span>
+                        -->
+                    <!--</div>
+                </div>-->
 
-            <div class="fly-panel fly-rank fly-rank-reply" id="LAY_replyRank">
-                <h3 class="fly-panel-title">榜单</h3>
-                <dl>
-                    <!--<i class="layui-icon fly-loading">&#xe63d;</i>-->
-                    {for start="1" end="13"}
-                    <dd>
-                        <a href="{:url('/user')}">
-                            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>笔芯</cite><i>{$i*$i}次回答</i>
-                        </a>
-                    </dd>
-                    {/for}
-                </dl>
-            </div>
+                <!--<div class="fly-panel fly-rank fly-rank-reply" id="LAY_replyRank">
+                    <h3 class="fly-panel-title">榜单</h3>
+                    <dl>
+                        &lt;!&ndash;<i class="layui-icon fly-loading">&#xe63d;</i>&ndash;&gt;
+                        {for start="1" end="13"}
+                        <dd>
+                            <a href="{:url('/user')}">
+                                <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>笔芯</cite><i>{$i*$i}次回答</i>
+                            </a>
+                        </dd>
+                        {/for}
+                    </dl>
+                </div>-->
 
             <dl class="fly-panel fly-list-one">
                 <dt class="fly-panel-title">本周热议</dt>
                 {for start="1" end="16"}
-                    <dd>
+                    <!--<dd>
                         <a href="{:url('/info')}">评论数榜单文章标题{$i}</a>
                         <span><i class="iconfont icon-pinglun1"></i> {$i+$i}</span>
-                    </dd>
+                    </dd>-->
                 {/for}
                 <!-- 无数据时 -->
-                <!--
                 <div class="fly-none">没有相关数据</div>
-                -->
             </dl>
 
-            <div class="fly-panel">
+            <!--<div class="fly-panel">
                 <div class="fly-panel-title">
                     赞助商
                 </div>
                 <div class="fly-panel-main">
                     <a href="http://layim.layui.com/?from=fly" target="_blank" class="fly-zanzhu"  style="background-color: #5FB878;">LayIM 3.0 - layui 旗舰之作</a>
                 </div>
-            </div>
+            </div>-->
 
-            <div class="fly-panel fly-link">
+            <!--<div class="fly-panel fly-link">
                 <h3 class="fly-panel-title">友情链接</h3>
                 <dl class="fly-panel-main">
                     {for start="1" end="5"}
@@ -316,7 +315,7 @@
                     {/for}
                     <dd><a class="fly-link">申请友链</a><dd>
                 </dl>
-            </div>
+            </div>-->
             {/block}
         </div>
     </div>

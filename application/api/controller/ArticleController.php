@@ -8,14 +8,63 @@
 
 namespace app\api\controller;
 
-
-use app\api\model\ArticleContent;
+use app\common\model\Article;
+use app\common\model\ArticleContent;
 use org\Curl;
+use QL\QueryList;
 use think\Request;
 
 
-class Article
+class ArticleController
 {
+
+    // 文章入库
+    public function createArticle(Request $request){
+        header("Access-Control-Allow-Origin: *");
+        $content_url = $request->param('content_url');
+        $url = 'https://mp.weixin.qq.com'. html_entity_decode($content_url);
+        $contentData = QueryList::get($url)
+            ->rules([
+                'content'   => array("#js_content", 'html', '->section:last() ->article:last()')
+            ])
+            ->queryData();
+        $content = $contentData[0]['content'];
+        $articleModel = new Article();
+        $fileid = $request->param('fileid');
+        $authorId = $request->param('uid');
+        $articleRes = $articleModel->where('fileid', $fileid)
+            ->where('author_id', $authorId)
+            ->find();
+        if(!empty($articleRes))
+            return json(['code'=>0, 'msg'=>'文章已存在!']);
+        $articleModel->startTrans();
+        try {
+
+            $articleModel->title = $request->param('title');
+            $articleModel->author_id = $authorId;
+            $articleModel->fileid = $fileid;
+            $articleModel->digest = $request->param('digest');
+            $articleModel->publish = $request->param('publish');
+            $articleModel->cover = $request->param('cover');
+            $articleModel->created = time();
+            $articleModel->updated = time();
+            $articleModel->save();
+            if(!$articleModel->id)
+                throw new \Exception('文章存储失败!');
+            $contentRes = ArticleContent::create([
+                'article_id'    => $articleModel->id,
+                'content'       => $content,
+                'created'       => time()
+            ]);
+            if(!$contentRes->id)
+                throw new \Exception('文章详情存储失败!');
+            $articleModel->commit();
+            return json(['code'=>0, 'msg'=>'文章入库成功!']);
+        }catch (\Exception $e){
+            $articleModel->rollback();
+            return json(['code'=>-1, 'msg'=>$e->getMessage()]);
+        }
+    }
 
     public function index(Request $request){
         $title = $request->param('title');
@@ -30,7 +79,8 @@ class Article
             'created'   => time(),
             'updated'   => time()
         ];
-        $article = \app\api\model\Article::create($data);
+        return json($data);
+        $article = Article::create($data);
         $articleId = $article->id;
         $content = ArticleContent::create([
             'article_id'    => $articleId,

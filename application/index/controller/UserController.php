@@ -9,11 +9,14 @@
 namespace app\index\controller;
 
 
+use app\common\model\User;
+
 class UserController
 {
 
-    public function index()
+    public function index($uid)
     {
-        return view();
+        $info = User::get($uid);
+        return view('', ['info'=>$info]);
     }
 }
