@@ -4,6 +4,12 @@
 
 {block name="meta"}<meta name="referrer" content="never">{/block}
 
+{block name='style'}
+    <style>
+        iframe{width: 100%;height: 450px;}
+    </style>
+{/block}
+
 {block name="left"}
     <div class="fly-panel detail-box">
         <h1>{$info.title}</h1>
@@ -119,6 +125,33 @@
             </form>
         </div>
     </div>-->
+{/block}
+
+{block name="script"}
+<script>
+    $(function () {
+        $('.detail-body').find('iframe').each(function (index, item) {
+            if($(item).data("src")){
+                let getImgs = $(item).data("src");
+                $(item).attr("src", getImgs);
+            }else{
+
+            }
+        });
+        var imgList = $('.detail-body').find('img');
+        let len = imgList.length;
+        imgList.each(function (index, item) {
+            if($(item).data("src")){
+                let getImgs = $(item).data("src");
+                if(len - 1 != index) {
+                    $(item).attr("src", getImgs);
+                }
+            }else{
+
+            }
+        })
+    });
+</script>
 {/block}
 
 
