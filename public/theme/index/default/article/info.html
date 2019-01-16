@@ -130,14 +130,31 @@
 {block name="script"}
 <script>
     $(function () {
-        $('.detail-body').find('iframe').each(function (index, item) {
-            if($(item).data("src")){
-                let getImgs = $(item).data("src");
-                $(item).attr("src", getImgs);
-            }else{
+        $('.video_iframe').each(function (i,e) {
+            var url=$(this).data('src');
+            console.log(url);
+            var host=url.split("?")[0];
+            var data=url.split("?")[1].split('&')
+            var data2={}
+            for(var i in data){
+                if(data[i].indexOf('=')!=-1){
+                    data2[data[i].split('=')[0]]=data[i].split('=')[1];
+                }
 
             }
-        });
+            host=host+'?';
+            for(var i in data2){
+                console.log(i)
+                if(i=='width'||i=='height'){
+
+                }else{
+                    host+=i+'='+data2[i]+'&'
+                }
+            }
+
+            $(e).attr('src',host).width('100%').height(data2.height*($('.detail-body').width()/data2.width))
+
+        })
         var imgList = $('.detail-body').find('img');
         let len = imgList.length;
         imgList.each(function (index, item) {
