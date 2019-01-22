@@ -31,13 +31,13 @@ class UserController
         ];
         $user = User::where('wechat_number', $wechatNumber)
             ->where('nickname', $author)
-            ->value('id');
+            ->find();
 //        return User::getLastSql();
         if(!empty($user))
             return json([
                 'code'  => 0,
                 'data'  => [
-                    'uid'   => $user
+                    'uid'   => $user['id']
                 ]
             ]);
         // 添加用户

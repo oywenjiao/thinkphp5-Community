@@ -12,6 +12,7 @@
 // [ 应用入口文件 ]
 namespace think;
 
+
 define('EXTEND_PATH', '../extend');
 
 // 加载基础文件

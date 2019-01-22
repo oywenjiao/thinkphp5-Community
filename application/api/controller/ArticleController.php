@@ -22,7 +22,11 @@ class ArticleController
     public function createArticle(Request $request){
         header("Access-Control-Allow-Origin: *");
         $content_url = $request->param('content_url');
-        $url = 'https://mp.weixin.qq.com'. html_entity_decode($content_url);
+        if(stristr($content_url, 'mp.weixin.qq.com')){
+            $url = html_entity_decode($content_url);
+        }else {
+            $url = 'https://mp.weixin.qq.com' . html_entity_decode($content_url);
+        }
         $contentData = QueryList::get($url)
             ->rules([
                 'content'   => array("#js_content", 'html', '->section:last() ->article:last()')
