@@ -61,32 +61,33 @@ class Page extends Paginator
             'slider' => null,
             'last'  => null
         ];
-        $side  = 3;
+        $side  = 1;
         $window = $side * 2;
-        if ($this->lastPage < $window + 6) {
+        if ($this->lastPage < $window + 2) {
             $block['first'] = $this->getUrlRange(1, $this->lastPage);
-        } elseif ($this->currentPage <= $window) {
+        } elseif ($this->currentPage < $window + 2) {
             $block['first'] = $this->getUrlRange(1, $window + 2);
-            $block['last'] = $this->getUrlRange($this->lastPage - 1, $this->lastPage);
         } elseif ($this->currentPage > ($this->lastPage - $window)) {
-            $block['first'] = $this->getUrlRange(1, 2);
-            $block['last'] = $this->getUrlRange($this->lastPage - ($window + 2), $this->lastPage);
+            $block['first'] = $this->getUrlRange(1, 1);
+            $block['last'] = $this->getUrlRange($this->lastPage - $window, $this->lastPage);
         } else {
-            $block['first'] = $this->getUrlRange(1, 2);
+            $block['first'] = $this->getUrlRange(1, 1);
             $block['slider'] = $this->getUrlRange($this->currentPage - $side, $this->currentPage + $side);
-            $block['last']  = $this->getUrlRange($this->lastPage - 1, $this->lastPage);
         }
         $html = '';
         if (is_array($block['first'])) {
             $html .= $this->getUrlLinks($block['first']);
+            $html .= $this->getDots();
         }
         if (is_array($block['slider'])) {
-            $html .= $this->getDots();
             $html .= $this->getUrlLinks($block['slider']);
+            $html .= $this->getDots();
         }
         if (is_array($block['last'])) {
-            $html .= $this->getDots();
             $html .= $this->getUrlLinks($block['last']);
+        }
+        if($this->currentPage+$window <= $this->lastPage){
+            $html .= $this->last();
         }
         return $html;
     }
@@ -108,13 +109,11 @@ class Page extends Paginator
                 );
             } else {
                 return sprintf(
-                    '%s<div style="text-align: center"><div class="laypage-main">%s %s %s %s %s</div></div> ',
+                    '%s<div style="text-align: center"><div class="laypage-main">%s %s %s</div></div> ',
                     $this->css(),
-                    $this->home(),
                     $this->prev(),
                     $this->getLinks(),
-                    $this->next(),
-                    $this->last()
+                    $this->next()
                 );
             }
         }
