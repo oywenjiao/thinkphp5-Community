@@ -42,7 +42,7 @@
                     <!--<i class="iconfont icon-renzheng" title="认证信息：{{ rows.user.approve }}"></i>
                     <i class="layui-badge fly-badge-vip">VIP3</i>-->
                 </a>
-                <span>2017-11-30</span>
+                <span>{$info.publish|date="Y年m月d日"}</span>
             </div>
             <div class="detail-hits" id="LAY_jieAdmin" data-id="123">
                 <span style="padding-right: 10px; color: #FF7200"></span>
@@ -160,9 +160,9 @@
         imgList.each(function (index, item) {
             if($(item).data("src")){
                 let getImgs = $(item).data("src");
-                if(len - 1 != index) {
+                // if(len - 1 != index) {
                     $(item).attr("src", getImgs);
-                }
+                // }
             }else{
 
             }

@@ -27,6 +27,9 @@ class ArticleController
     }
 
     public function info($id){
+        // 更新阅读量
+        Article::where('id', $id)
+            ->setInc('view_number');
         $info = Article::get($id);
         return view('', ['info'=>$info]);
     }

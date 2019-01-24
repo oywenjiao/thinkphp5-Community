@@ -21,7 +21,7 @@
         <ul class="fly-list">
             {volist name='list' id='article'}
             <li>
-                <a href="{:url('user')}" class="fly-avatar">
+                <a href="{:url('/user', ['uid'=>$article.author_id])}" class="fly-avatar">
                     <img src="{$article.author.headimg}" alt="{$article.author.nickname}">
                 </a>
                 <h2>
@@ -29,7 +29,7 @@
                     <a href="{:url('/info', ['id'=>$article.id])}">{$article.title}</a>
                 </h2>
                 <div class="fly-list-info">
-                    <a href="{:url('user')}">
+                    <a href="{:url('/user', ['uid'=>$article.author_id])}">
                         <cite>{$article.author.nickname}</cite>
                         <!--<i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
                         <i class="layui-badge fly-badge-vip">VIP3</i>-->
