@@ -21,6 +21,11 @@ Route::get('/article', 'article/index');
 Route::get('/info', 'article/info');
 
 Route::get('/user', 'user/index');
+Route::get('/login', 'user/login');
+Route::get('/register', 'user/register');
+Route::get('/forget', 'user/forget');
+
+Route::get('/case', 'case/index');
 
 return [
 

@@ -11,7 +11,7 @@ namespace app\index\controller;
 
 use app\common\model\Article;
 
-class ArticleController
+class ArticleController extends BaseController
 {
     public function index(){
         $list = Article::order('id', 'desc')

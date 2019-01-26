@@ -4,7 +4,7 @@ namespace app\index\controller;
 
 use app\common\model\Article;
 
-class IndexController
+class IndexController extends BaseController
 {
     public function index()
     {
